@@ -40,15 +40,6 @@
 											<div class="card">
 												<div class="card-block">
 												<h4 class="sub-title">Cad. Telefone</h4>
-										 <form class="form-material"  action="<%= request.getContextPath()%>/ServletTelefone" method="post" id="formFone" >
-										  
-										  
-										 
-										 
-										 
-										 </form>								
-												
-												
 												
 												</div>
 											</div>

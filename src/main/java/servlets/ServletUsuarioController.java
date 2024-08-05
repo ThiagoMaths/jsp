@@ -1,6 +1,7 @@
 package servlets;
 
 import java.io.IOException;
+import java.io.Serial;
 import java.util.List;
 
 import org.apache.commons.io.IOUtils;
@@ -23,10 +24,11 @@ import model.ModelLogin;
 @WebServlet( urlPatterns =  {"/ServletUsuarioController"})
 public class ServletUsuarioController extends ServletGenericUtil {
 	
+	@Serial
 	private static final long serialVersionUID = 1L;
 	
 	
-	private DAOUsuarioRepository daoUsuarioRepository = new DAOUsuarioRepository();
+	private final DAOUsuarioRepository daoUsuarioRepository = new DAOUsuarioRepository();
 
     public ServletUsuarioController() {
     }
