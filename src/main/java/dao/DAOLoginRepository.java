@@ -10,7 +10,7 @@ import model.ModelLogin;
 public class DAOLoginRepository {
 	
 	
-	private Connection connection;
+	private final Connection connection;
 	
 	
 	public DAOLoginRepository() {
