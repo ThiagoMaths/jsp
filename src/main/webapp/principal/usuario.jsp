@@ -315,6 +315,11 @@
   </tbody>
 </table>
 </div>
+          <nav aria-label="Page navigation example">
+                      <ul class="pagination" id="ulPaginacaoAjax">
+
+              </ul>
+          </nav>
 
 <span id="totalResultados"></span>
 	
@@ -386,36 +391,48 @@ function buscarUsuario() {
 	 var urlAction = document.getElementById('formUser').action;
 	
 	 $.ajax({
-	     
+
 	     method: "get",
 	     url : urlAction,
 	     data : "nomeBusca=" + nomeBusca + '&acao=buscarUserAjax',
 	     success: function (response, textStatus, xhr) {
-		 
+
 		 var json = JSON.parse(response);
-		 
-		 
+
+
 		 $('#tabelaresultados > tbody > tr').remove();
-		 
+
 		  for(var p = 0; p < json.length; p++){
 		      $('#tabelaresultados > tbody').append('<tr> <td>'+json[p].id+'</td> <td> '+json[p].nome+'</td> <td><button onclick="verEditar('+json[p].id+')" type="button" class="btn btn-info">Ver</button></td></tr>');
 		  }
-		  
-		  document.getElementById('totalResultados').textContent = 'Resultados: ' + json.length;
-		  var totalPagina = xhr.getResponseHeader('totalPagina');
-		  alert(totalPagina);
 
-			 
+		  document.getElementById('totalResultados').textContent = 'Resultados: ' + json.length;
+		  var totalPagina =   xhr.getResponseHeader('totalPagina');
+
+          for ( var p = 0; p < totalPagina; p++) {
+
+              var url = urlAction + "?nomeBusca=" + nomeBusca + "&acao=buscarUserAjax"+ (p * 5 );
+
+        $("#ulPaginacaoAjax").append('<li class=\"page-item\"><a class=\"page-link\" href=\"'+url+'"\'>'+( p + 1)+'</a></li>');
+
+             }
+
 	     }
-	     
+
 	 }).fail(function(xhr, status, errorThrown){
 	    alert('Erro ao buscar usuário por nome: ' + xhr.responseText);
+
 	 });
 	
 	
     }
     
 }
+
+
+
+
+
 
 
 function criarDeleteComAjax() {
@@ -431,11 +448,11 @@ function criarDeleteComAjax() {
 	     url : urlAction,
 	     data : "id=" + idUser + '&acao=deletarajax',
 	     success: function (response, textStatus, xhr ) {
-		 
+
 		  limparForm();
 		  document.getElementById('msg').textContent = response;
 	     }
-	     
+
 	 }).fail(function(xhr, status, errorThrown){
 	    alert('Erro ao deletar usuário por id: ' + xhr.responseText);
 	 });
