@@ -334,6 +334,52 @@
 
 <script type="text/javascript">
 
+    function buscarUserPagAjax(url){
+
+        var nomeBusca = document.getElementById('nomeBusca').value; /*Erro nesta parte ?*/
+        var urlAction = document.getElementById('formUser').action;
+
+        $.ajax({
+
+            method: "get",
+            url : urlAction,
+            data : url,
+            success: function (response, textStatus, xhr) {
+
+                var json = JSON.parse(response);
+
+
+                $('#tabelaresultados > tbody > tr').remove();
+                $('#ulPaginacaoAjax > li').remove();
+
+
+                for(var p = 0; p < json.length; p++){
+                    $('#tabelaresultados > tbody').append('<tr> <td>'+json[p].id+'</td> <td> '+json[p].nome+'</td> <td><button onclick="verEditar('+json[p].id+')" type="button" class="btn btn-info">Ver</button></td></tr>');
+                }
+
+                document.getElementById('totalResultados').textContent = 'Resultados: ' + json.length;
+                var totalPagina = xhr.getResponseHeader("totalPagina");
+
+                for ( var p = 0; p < totalPagina; p++) {
+
+                    var url =  'nomeBusca=' + nomeBusca + '&acao=buscarUserAjax&Pagina=' + (p * 5 );
+
+                    $("#ulPaginacaoAjax").append('<li class="page-item"><a class="page-link" href="#" onclick="buscarUserPagAjax(\''+url+'\')">' + (p + 1) + '</a></li>');
+
+                }
+
+            }
+
+        }).fail(function(xhr, status, errorThrown){
+            alert('Erro ao buscar usuário por nome: ' + xhr.responseText);
+
+        });
+
+
+
+
+    }
+
 
 function pesquisaCep() {
     var cep = $("#cep").val();
@@ -383,13 +429,13 @@ function verEditar(id) {
 
 
 function buscarUsuario() {
-    
-    var nomeBusca = document.getElementById('nomeBusca').value;
-    
+
+    var nomeBusca = document.getElementById('nomeBusca').value; /*Erro nesta parte ?*/
+
     if (nomeBusca != null && nomeBusca !== '' && nomeBusca.trim() !== ''){ /*Validando que tem que ter valor pra buscar no banco*/
-	
+
 	 var urlAction = document.getElementById('formUser').action;
-	
+
 	 $.ajax({
 
 	     method: "get",
@@ -401,6 +447,8 @@ function buscarUsuario() {
 
 
 		 $('#tabelaresultados > tbody > tr').remove();
+         $('#ulPaginacaoAjax > li').remove();
+
 
 		  for(var p = 0; p < json.length; p++){
 		      $('#tabelaresultados > tbody').append('<tr> <td>'+json[p].id+'</td> <td> '+json[p].nome+'</td> <td><button onclick="verEditar('+json[p].id+')" type="button" class="btn btn-info">Ver</button></td></tr>');
@@ -411,9 +459,9 @@ function buscarUsuario() {
 
           for ( var p = 0; p < totalPagina; p++) {
 
-              var url = urlAction + "?nomeBusca=" + nomeBusca + "&acao=buscarUserAjax"+ (p * 5 );
+              var url = "nomeBusca=" + nomeBusca + "&acao=buscarUserAjax&Pagina=" + (p * 5 );
 
-        $("#ulPaginacaoAjax").append('<li class=\"page-item\"><a class=\"page-link\" href=\"'+url+'"\'>'+( p + 1)+'</a></li>');
+              $("#ulPaginacaoAjax").append('<li class="page-item"><a class="page-link" href="#" onclick="buscarUserPagAjax(\''+url+'\')">' + (p + 1) + '</a></li>');
 
              }
 
@@ -423,10 +471,10 @@ function buscarUsuario() {
 	    alert('Erro ao buscar usuário por nome: ' + xhr.responseText);
 
 	 });
-	
-	
+
+
     }
-    
+
 }
 
 
