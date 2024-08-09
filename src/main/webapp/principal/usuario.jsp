@@ -415,7 +415,7 @@ function buscaUserPagAjax(url) {
                 var url = 'nomeBusca=' + nomeBusca + '&acao=buscarUserAjaxPage&pagina=' + (p * 5);
 
 
-                $("#ulPaginacaoUserAjax").append('<li class="page-item"><a class="page-link" href="#" onclick="buscaUserPagAjax(\'' + url + '\')>' + (p + 1) + '</a></li>');
+                $("#ulPaginacaoUserAjax").append('<li class="page-item"> <a class="page-link" href="#" onclick="buscaUserPagAjax(\'' + url + '\')">' + (p + 1) + '</a></li>');
 
             }
 
@@ -428,7 +428,7 @@ function buscaUserPagAjax(url) {
 
 function buscarUsuario() {
 
-    var nomeBusca = document.getElementById('nomeBusca').value; /*Erro nesta parte ?*/
+    var nomeBusca = document.getElementById('nomeBusca').value;
 
     if (nomeBusca != null && nomeBusca !== '' && nomeBusca.trim() !== ''){ /*Validando que tem que ter valor pra buscar no banco*/
 
@@ -459,7 +459,7 @@ function buscarUsuario() {
 
               var url = 'nomeBusca=' + nomeBusca + '&acao=buscarUserAjaxPage&pagina=' + (p * 5 );
 
-              $("#ulPaginacaoUserAjax").append('<li class="page-item"><a class="page-link" href="#" onclick=buscaUserPagAjax(\''+url+'\')>' + (p + 1) + '</a></li>');
+              $("#ulPaginacaoUserAjax").append('<li class="page-item"><a class="page-link" href="#" onclick="buscaUserPagAjax(\''+url+'\')">' + (p + 1) + '</a></li>');
              }
 
 	     }
@@ -468,17 +468,10 @@ function buscarUsuario() {
 	    alert('Erro ao buscar usuário por nome: ' + xhr.responseText);
 
 	 });
-
-
+        
     }
 
 }
-
-
-
-
-
-
 
 function criarDeleteComAjax() {
 
