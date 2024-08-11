@@ -1,13 +1,13 @@
 package dao;
 
+import connection.SingleConnectionBanco;
+import model.ModelLogin;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
-
-import connection.SingleConnectionBanco;
-import model.ModelLogin;
 
 public class DAOUsuarioRepository {
 
@@ -368,15 +368,48 @@ public class DAOUsuarioRepository {
 
 		return modelLogin;
 	}
+	public ModelLogin consultaUsuarioID(Long id) throws Exception {
 
-	public ModelLogin consultaUsuarioId(String id, Long  userLogado) throws Exception {
+		ModelLogin modelLogin = new ModelLogin();
+
+		String sql = "select * from model_login where id = ? and useradmin is false ";
+
+		PreparedStatement statement = connection.prepareStatement(sql);
+		statement.setLong(1, id);
+
+		ResultSet resultado = statement.executeQuery();
+
+		while (resultado.next()) /* se tem resultado */ {
+
+			modelLogin.setId(resultado.getLong("id"));
+			modelLogin.setEmail(resultado.getString("email"));
+			modelLogin.setSenha(resultado.getString("senha"));
+			modelLogin.setNome(resultado.getString("nome"));
+			modelLogin.setLogin(resultado.getString("login"));
+			modelLogin.setUserAdmin(resultado.getBoolean("userAdmin"));
+			modelLogin.setPerfil(resultado.getString("perfil"));
+			modelLogin.setSexo(resultado.getString("sexo"));
+			modelLogin.setFotoUser(resultado.getString("fotouser"));
+			modelLogin.setExtensaofotouser(resultado.getString("extensaofotouser"));
+			modelLogin.setCep(resultado.getString("cep"));
+			modelLogin.setLogradouro(resultado.getString("logradouro"));
+			modelLogin.setBairro(resultado.getString("bairro"));
+			modelLogin.setCidade(resultado.getString("cidade"));
+			modelLogin.setUf(resultado.getString("uf"));
+			modelLogin.setNumero(resultado.getString("numero"));
+
+		}
+
+		return modelLogin;
+	}
+	public ModelLogin consultaUsuarioId(Long id, Long  userLogado) throws Exception {
 
 		ModelLogin modelLogin = new ModelLogin();
 
 		String sql = "select * from model_login where id = ? and useradmin is false and usuario_id = ? ";
 
 		PreparedStatement statement = connection.prepareStatement(sql);
-		statement.setLong(1, Long.parseLong(id));
+		statement.setLong(1, id);
 		statement.setLong(2, userLogado);
 
 		ResultSet resultado = statement.executeQuery();

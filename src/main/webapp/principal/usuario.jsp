@@ -213,8 +213,11 @@
 															<button type="button" class="btn btn-primary waves-effect waves-light" onclick="limparForm();" >Novo</button>
 												            <button  class="btn btn-success waves-effect waves-light">Salvar</button>
 												            <button type="button"  class="btn btn-info waves-effect waves-light" onclick="criarDeleteComAjax();" >Excluir</button>
-												         <a href="<%=request.getContextPath() %>/ServletTelefone?iduser=${modolLogin.id}" class="btn btn-info waves-effect waves-light">Telefone</a>
 
+												            <c:if test="${modolLogin.id > 0 }">
+                                                                <a href="<%=request.getContextPath()%>/ServletTelefone?iduser=${modolLogin.id}" class="btn btn-info waves-effect waves-light">Telefone</a>
+
+                                                            </c:if>
 												            <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#exampleModalUsuario">Pesquisar</button>
 
                                                         </form>
@@ -334,7 +337,17 @@
 
 <script type="text/javascript">
 
+$("#numero").keypress(function (event) {
 
+    return /\d/.test(String.fromCharCode(event.keyCode));
+
+});
+
+$("#cep").keypress(function (event) {
+
+    return /\d/.test(String.fromCharCode(event.keyCode));
+
+});
 
 function pesquisaCep() {
     var cep = $("#cep").val();

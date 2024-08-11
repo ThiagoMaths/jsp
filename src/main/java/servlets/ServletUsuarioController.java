@@ -97,7 +97,7 @@ public class ServletUsuarioController extends ServletGenericUtil {
 			
 			    String id = request.getParameter("id");
 			 
-			     ModelLogin modelLogin = daoUsuarioRepository.consultaUsuarioId(id, super.getUserLogado(request));
+			     ModelLogin modelLogin = daoUsuarioRepository.consultaUsuarioId(Long.valueOf(id), super.getUserLogado(request));
 			 
 			     List<ModelLogin> modelLogins = daoUsuarioRepository.consultaUsuarioList(super.getUserLogado(request));
 			     request.setAttribute("modelLogins", modelLogins);
@@ -121,7 +121,7 @@ public class ServletUsuarioController extends ServletGenericUtil {
 		 } else if (acao != null && !acao.isEmpty() && acao.equalsIgnoreCase("downloadFoto")) {
 			String idUser = request.getParameter("id");
 			
-			ModelLogin modelLogin = daoUsuarioRepository.consultaUsuarioId(idUser, super.getUserLogado(request));
+			ModelLogin modelLogin = daoUsuarioRepository.consultaUsuarioId(Long.valueOf(idUser), super.getUserLogado(request));
 			if (modelLogin.getFotoUser() != null && !modelLogin.getFotoUser().isEmpty()) {
 				
 				response.setHeader("content-Disposition", "attachment;filename=arquivo." + modelLogin.getExtensaofotouser());

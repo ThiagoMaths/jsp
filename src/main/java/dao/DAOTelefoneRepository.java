@@ -1,22 +1,49 @@
 package dao;
 
+import connection.SingleConnectionBanco;
+import model.ModelTelefone;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
-import connection.SingleConnectionBanco;
-import model.ModelTelefone;
-
 public class DAOTelefoneRepository {
-	
+	DAOUsuarioRepository usuarioRepository = new DAOUsuarioRepository();
 	private Connection connection;
 	
 	public DAOTelefoneRepository() {
 		connection = SingleConnectionBanco.getConnection();
+
 	}
-	
+
+	public List<ModelTelefone> listFone (Long idUserPai) throws Exception{
+		List<ModelTelefone> retorno = new ArrayList<ModelTelefone>();
+
+		String sql = "select * from telefone where usuario_pai_id = ?";
+		PreparedStatement ps = connection.prepareStatement(sql);
+		ps.setLong(1, idUserPai);
+
+		ResultSet rs = ps.executeQuery();
+		while (rs.next()) {
+			ModelTelefone model = new ModelTelefone();
+			model.setId(rs.getLong("id"));
+			model.setNumero(rs.getString("numero"));
+			model.setUsuario_cad_id(usuarioRepository.consultaUsuarioID(rs.getLong("usuario_cad_id")));
+			model.setUsuario_pai_id(usuarioRepository.consultaUsuarioID(rs.getLong("usuario_pai_id")));
+
+			retorno.add(model);
+
+		}
+
+
+
+        return retorno;
+    }
+
+
+
 	public void gravaTelefone (ModelTelefone modelTelefone) throws Exception{
 		
 		String sql = "insert into telefone (numero, usuario_pai_id, usuario_cad_id) values (?,?,?)";
