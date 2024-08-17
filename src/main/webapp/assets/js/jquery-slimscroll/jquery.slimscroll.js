@@ -109,7 +109,7 @@
             if ($.isPlainObject(options))
             {
               // Pass height: auto to an existing slimscroll object to force a resize after contents have changed
-              if ( 'height' in options && options.height == 'auto' ) {
+              if ( 'height' in options && options.height === 'auto' ) {
                 me.parent().css('height', 'auto');
                 me.css('height', 'auto');
                 var height = me.parent().parent().height();
@@ -155,7 +155,7 @@
         }
 
         // optionally set height to the parent's height
-        o.height = (o.height == 'auto') ? me.parent().height() : o.height;
+        o.height = (o.height === 'auto') ? me.parent().height() : o.height;
 
         // wrap content
         var wrapper = $(divS)
@@ -207,7 +207,7 @@
           });
 
         // set position
-        var posCss = (o.position == 'right') ? { right: o.distance } : { left: o.distance };
+        var posCss = (o.position === 'right') ? { right: o.distance } : { left: o.distance };
         rail.css(posCss);
         bar.css(posCss);
 

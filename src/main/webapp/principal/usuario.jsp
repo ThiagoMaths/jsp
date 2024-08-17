@@ -79,8 +79,20 @@
                                                                 <span class="form-bar"></span>
                                                                 <label class="float-label">Nome:</label>
                                                             </div>
-                                                            
-                                                            <div class="form-group form-default form-static-label">
+
+                                                             <div class="form-group form-default form-static-label">
+                                                                 <input type="text" name="dataNascimento" id="dataNascimento" class="form-control" required="required" value="${modolLogin.dataNascimento}">
+                                                                 <span class="form-bar"></span>
+                                                                 <label class="float-label">Data Nascimento:</label>
+                                                             </div>
+                                                             <div class="form-group form-default form-static-label">
+                                                                 <input type="text" name="rendamensal" id="rendamensal" class="form-control" required="required" value="${modolLogin.rendamensal}">
+                                                                 <span class="form-bar"></span>
+                                                                 <label class="float-label">Renda Mensal:</label>
+                                                             </div>
+
+
+                                                             <div class="form-group form-default form-static-label">
                                                                 <input type="email" name="email" id="email" class="form-control" required="required" autocomplete="off" value="${modolLogin.email}">
                                                                 <span class="form-bar"></span>
                                                                 <label class="float-label">E-mail:</label>
@@ -150,7 +162,7 @@
                                                             </div>   
                                                             
 															<div class="form-group form-default form-static-label">
-                                                                <input type="text" name="cidade" id="cidade" class="form-control" required="required" autocomplete="off" value="${modolLogin.localidade}">
+                                                                <input type="text" name="cidade" id="cidade" class="form-control" required="required" autocomplete="off" value="${modolLogin.cidade}">
                                                                 <span class="form-bar"></span>
                                                                 <label class="float-label">Cidade</label>
                                                             </div>     
@@ -337,6 +349,36 @@
 
 <script type="text/javascript">
 
+    $("#rendamensal").maskMoney({showSymbol:true, symbol:"R$ ", decimal:",", thousands:"."});
+    const formatter = new Intl.NumberFormat('PT-BR', {
+        currency : 'BRL',
+        minimumFractionDigits : 2
+
+    });
+
+    $("#rendamensal").val(formatter.format($("#rendamensal").val()));
+    $("#rendamensal").focus();
+
+    var dataNascimento = $("#dataNascimento").val();
+    var dataFormat  = new date(dataNascimento);
+
+    $("#dataNascimento").val(dataFormat.toLocaleString('pt-BR', {timeZone: 'UTC'}));
+
+    $("#nome").focus();
+
+    $(function () {
+        $("#dataNascimento").datepicker({
+            dateFormat: 'dd/mm/yy',
+            dayNames: ['Domingo', 'Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sábado'],
+            dayNamesMin: ['D', 'S', 'T', 'Q', 'Q', 'S', 'S', 'D'],
+            dayNamesShort: ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb', 'Dom'],
+            monthNames: ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'],
+            monthNamesShort: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez'],
+            nextText: '>',
+            prevText: '<'
+        });
+    });
+
 $("#numero").keypress(function (event) {
 
     return /\d/.test(String.fromCharCode(event.keyCode));
@@ -358,7 +400,7 @@ function pesquisaCep() {
 	        $("#cep").val(dados.cep);
 	        $("#logradouro").val(dados.logradouro);
             $("#bairro").val(dados.bairro);
-            $("#localidade").val(dados.localidade);
+            $("#cidade").val(dados.localidade);
             $("#uf").val(dados.uf);
 	}
 	    

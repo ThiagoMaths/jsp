@@ -30,7 +30,12 @@
 	</dependency>
 	
 	
-	
+	<dependency>
+    <groupId>org.apache.poi</groupId>
+    <artifactId>poi</artifactId>
+    <version>5.3.0</version>
+</dependency>
+
 	
 <dependency>
 	<groupId>tomcat</groupId>
@@ -55,14 +60,33 @@
 			<artifactId>jakarta.servlet.jsp.jstl</artifactId>
 			<version>2.0.0</version>
 		</dependency>
+
+
+
 		<dependency>
 			<groupId>javax.servlet</groupId>
 			<artifactId>jsp-api</artifactId>
 			<version>2.0</version>
 			<scope>provided</scope>
 		</dependency>
+      <dependency>
+          <groupId>commons-codec</groupId>
+          <artifactId>commons-codec</artifactId>
+          <version>1.16.1</version>
+      </dependency>
 
-    
+		<dependency>
+		    <groupId>net.sf.jasperreports</groupId>
+		    <artifactId>jasperreports</artifactId>
+		    <version>7.0.0</version>
+		</dependency>
+
+      <dependency>
+          <groupId>net.sf.jasperreports</groupId>
+          <artifactId>jasperreports-pdf</artifactId>
+          <version>7.0.0</version>
+      </dependency>
+
   </dependencies>
   <build>
     <plugins>

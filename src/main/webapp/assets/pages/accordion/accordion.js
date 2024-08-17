@@ -24,7 +24,7 @@ $(document).ready(function(){
             });
         } );
 
-        if($(".accordion-msg").attr('aria-expanded') == 'true'){
+        if($(".accordion-msg").attr('aria-expanded') === 'true'){
             $(".accordion-msg").addClass("scale_active");
         }
         else{

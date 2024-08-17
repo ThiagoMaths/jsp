@@ -11,7 +11,7 @@ Modernizr.addTest('cssscrollbar', function() {
 				.join('#') + "scrollbar{width:0px}";
 
 	Modernizr.testStyles(styles, function(node) {
-		bool = 'scrollWidth' in node && node.scrollWidth == 40;
+		bool = 'scrollWidth' in node && node.scrollWidth === 40;
 	});
 
 	return bool;

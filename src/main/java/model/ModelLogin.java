@@ -1,9 +1,14 @@
 package model;
 
+import java.io.Serial;
 import java.io.Serializable;
+import java.sql.Date;
+import java.util.ArrayList;
+import java.util.List;
 
 public class ModelLogin implements Serializable {
 
+	@Serial
 	private static final long serialVersionUID = 1L;
 
 	private Long id;
@@ -26,7 +31,14 @@ public class ModelLogin implements Serializable {
 	private String numero;
 	
 	private boolean userAdmin;
-	
+
+	private Date dataNascimento;
+	private Double rendamensal;
+
+	private List<ModelTelefone> telefones = new ArrayList<ModelTelefone>();
+
+
+
 
 	public boolean getUserAdmin() {
 		return userAdmin;
@@ -40,11 +52,11 @@ public class ModelLogin implements Serializable {
 
 		if (this.id == null) {
 			return true; /* Inserir um novo */
-		} else if (this.id != null && this.id > 0) {
+		} else if (this.id > 0) {
 			return false; /* Atualizar */
 		}
 
-		return id == null;
+		return false;
 	}
 
 	public Long getId() {
@@ -178,4 +190,39 @@ public class ModelLogin implements Serializable {
 		this.numero = numero;
 	}
 
+	public Date getDataNascimento() {
+		return dataNascimento;
+	}
+
+	public void setDataNascimento(Date dataNascimento) {
+		this.dataNascimento = dataNascimento;
+	}
+
+	public Double getRendamensal() {
+		return rendamensal;
+	}
+
+	public void setRendamensal(Double rendamensal) {
+		this.rendamensal = rendamensal;
+	}
+
+	public List<ModelTelefone> getTelefones() {
+		return telefones;
+	}
+
+	public void setTelefones(List<ModelTelefone> telefones) {
+		this.telefones = telefones;
+	}
+
+
+	public String getMostraTelefoneRel() {
+
+		String fone = "";
+
+		for (ModelTelefone telefone : telefones) {
+			fone += telefone.getNumero() + "\n";
+		}
+		return fone;
+	}
 }
+
