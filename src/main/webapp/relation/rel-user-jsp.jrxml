@@ -1,0 +1,112 @@
+<!-- Created with Jaspersoft Studio version 7.0.0.final using JasperReports Library version 7.0.0-b478feaa9aab4375eba71de77b4ca138ad2f62aa  -->
+<jasperReport name="rel-user-jsp" language="java" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="af1809dc-762f-4289-8c4f-585163a42b96">
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="One Empty Record"/>
+	<parameter name="PARAM_SUB_REPORT" class="java.lang.String"/>
+	<query language="sql"><![CDATA[]]></query>
+	<field name="cidade" class="java.lang.String">
+		<description><![CDATA[cidade]]></description>
+	</field>
+	<field name="numero" class="java.lang.String">
+		<description><![CDATA[numero]]></description>
+	</field>
+	<field name="bairro" class="java.lang.String">
+		<description><![CDATA[bairro]]></description>
+	</field>
+	<field name="localidade" class="java.lang.String">
+		<description><![CDATA[localidade]]></description>
+	</field>
+	<field name="novo" class="java.lang.Boolean">
+		<description><![CDATA[novo]]></description>
+	</field>
+	<field name="nome" class="java.lang.String">
+		<description><![CDATA[nome]]></description>
+	</field>
+	<field name="userAdmin" class="java.lang.Boolean">
+		<description><![CDATA[userAdmin]]></description>
+	</field>
+	<field name="login" class="java.lang.String">
+		<description><![CDATA[login]]></description>
+	</field>
+	<field name="fotoUser" class="java.lang.String">
+		<description><![CDATA[fotoUser]]></description>
+	</field>
+	<field name="telefones" class="java.util.List">
+		<description><![CDATA[telefones]]></description>
+	</field>
+	<field name="rendamensal" class="java.lang.Double">
+		<description><![CDATA[rendamensal]]></description>
+	</field>
+	<field name="cep" class="java.lang.String">
+		<description><![CDATA[cep]]></description>
+	</field>
+	<field name="perfil" class="java.lang.String">
+		<description><![CDATA[perfil]]></description>
+	</field>
+	<field name="senha" class="java.lang.String">
+		<description><![CDATA[senha]]></description>
+	</field>
+	<field name="uf" class="java.lang.String">
+		<description><![CDATA[uf]]></description>
+	</field>
+	<field name="logradouro" class="java.lang.String">
+		<description><![CDATA[logradouro]]></description>
+	</field>
+	<field name="mostraTelefoneRel" class="java.lang.String">
+		<description><![CDATA[mostraTelefoneRel]]></description>
+	</field>
+	<field name="id" class="java.lang.Long">
+		<description><![CDATA[id]]></description>
+	</field>
+	<field name="dataNascimento" class="java.sql.Date">
+		<description><![CDATA[dataNascimento]]></description>
+	</field>
+	<field name="sexo" class="java.lang.String">
+		<description><![CDATA[sexo]]></description>
+	</field>
+	<field name="email" class="java.lang.String">
+		<description><![CDATA[email]]></description>
+	</field>
+	<field name="extensaofotouser" class="java.lang.String">
+		<description><![CDATA[extensaofotouser]]></description>
+	</field>
+	<group name="grupo_user">
+		<expression><![CDATA[$F{nome}]]></expression>
+		<groupHeader>
+			<band height="25">
+				<element kind="textField" uuid="5e7308d2-3eb0-49b5-9dbd-c4d0e1e903e1" x="-20" y="0" width="250" height="19">
+					<expression><![CDATA[$F{nome}]]></expression>
+				</element>
+				<element kind="textField" uuid="3e79a724-528d-4d90-a532-03de38dbed33" x="310" y="0" width="270" height="18" pattern="dd/MM/yyyy" blankWhenNull="true">
+					<expression><![CDATA[$F{dataNascimento}]]></expression>
+				</element>
+				<element kind="line" uuid="fcabe192-63cc-4f50-b91c-7f7c5f562c2a" x="-20" y="18" width="590" height="1"/>
+			</band>
+		</groupHeader>
+	</group>
+	<title height="99" splitType="Stretch">
+		<element kind="staticText" uuid="9b59f213-41df-4ef3-b5e9-8d1521c543be" x="-20" y="0" width="590" height="81" fontName="Bauhaus 93" fontSize="26.0" hTextAlign="Center">
+			<text><![CDATA[Relatório de Usuário]]></text>
+		</element>
+	</title>
+	<columnHeader height="24" splitType="Stretch">
+		<element kind="staticText" uuid="3d7e1801-8608-4d5c-a549-c0d3dc6efb2e" x="305" y="0" width="265" height="18">
+			<text><![CDATA[Data de Nascimento:]]></text>
+		</element>
+		<element kind="staticText" uuid="aeec968b-b8e1-488c-a1e1-33e0a94928e0" x="-20" y="-1" width="250" height="19">
+			<text><![CDATA[Nome:]]></text>
+		</element>
+	</columnHeader>
+	<detail>
+		<band height="20">
+			<element kind="subreport" uuid="4a3df6c6-7ac5-4c1e-9bb5-fce1d7c6a581" x="-10" y="0" width="580" height="20">
+				<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource($F{telefones})]]></dataSourceExpression>
+				<expression><![CDATA[$P{PARAM_SUB_REPORT} + "sub_report_user.jasper"]]></expression>
+			</element>
+		</band>
+	</detail>
+	<summary height="31">
+		<element kind="textField" uuid="9d15531f-2861-44c8-ac7f-91be5d2e24bd" x="300" y="12" width="259" height="19" pattern="dd MMMM yyyy hh:mm">
+			<expression><![CDATA["Impresso em: " + new java.util.Date()]]></expression>
+		</element>
+	</summary>
+</jasperReport>
