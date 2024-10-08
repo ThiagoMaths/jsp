@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DdlMappings">
+    <mapping uuid="20b3176a-418b-4d0e-86db-2377ed95e754" name="curso-jsp Mapping">
+      <data-sources db="6b37f158-46bd-44cd-8c51-a37a476e5efb" />
+      <scope>
+        <node kind="database" negative="1" />
+      </scope>
+    </mapping>
+  </component>
+</project>
