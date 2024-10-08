@@ -1,0 +1,41 @@
+html{
+    width: 500px;
+    overflow-x: hidden;
+}
+
+form {
+    position: absolute;
+    top: 40%;
+    left: 33%;
+    right: 33%;
+}
+
+h1 {
+    position: absolute;
+    top: 30%;
+    left: 33%;
+}
+
+h5 {
+    position: absolute;
+    top: 30%;
+    left: 33%;
+}
+
+.form-group {
+    width: 30%;
+    margin: 10px;
+}
+
+.input-group-button{
+    width: 50%;
+    margin-top: 10px;
+}
+
+.msg {
+    position: absolute;
+    top: 80%;
+    left: 33%;
+    font-size: 15px;
+    color: red;
+}
